@@ -10,13 +10,13 @@ Preserves sibling paths so the orchestrator resolves `../impeccable`, `../scroll
 
 ```bash
 git clone https://github.com/user1990/skills.git
-cp -R skills/design/* ~/.agents/skills/
+./scripts/install.sh
 ```
 
-Or per project:
+Or manually:
 
 ```bash
-cp -R skills/design/* .agents/skills/
+cp -R skills/design/* ~/.agents/skills/
 ```
 
 ### skills.sh (individual skills)
