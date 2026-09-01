@@ -13,3 +13,4 @@ for skill in design impeccable stop-slop design-taste-frontend web-animation-des
   fi
 done
 echo "Done. Orchestrator: $DEST/design/SKILL.md"
+echo "All pack skills are manual-only (/design). They will not auto-load in coding sessions."

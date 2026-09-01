@@ -29,9 +29,15 @@ Pick `design` plus any specialists you want. For full orchestration, install the
 
 ## Usage
 
-Describe what you want — new page, facelift, landing, scroll journey — in any project. The **design** skill classifies, picks specialists, runs one phase, verifies, and exits with next steps.
+**Manual only.** Type `/design` to start the orchestrator. It does not auto-load when you mention UI, landing pages, or polish in normal coding sessions — so CashLift, pari-portfolio, MyDears, and similar repos keep using their own `.agents/skills/` without clash.
 
-Explicit invoke: `/design` or natural language ("redesign the pricing page").
+Describe what you want after invoking:
+
+> `/design` new pricing landing, premium B2B vibe
+
+The orchestrator classifies, picks one specialist per phase, verifies, and exits with next steps. See [skills/design/PACK.md](skills/design/PACK.md).
+
+Explicit invoke also works: `/impeccable polish`, `/scrollcraft`, etc. — all pack skills are manual-only (`disable-model-invocation: true`).
 
 ## What's included
 

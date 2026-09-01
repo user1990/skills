@@ -1,9 +1,12 @@
 ---
 name: design
-description: Orchestrates premium UI/UX work across vendored design skills. Classifies new surfaces, facelifts, copy, motion, and scroll-journey pages; runs one specialist skill per phase; verifies; encodes recurring fixes into DESIGN.md; exits with next steps. Use when the user wants a new page, landing, facelift, redesign, UI polish, marketing surface, scroll experience, or premium design workflow without picking skills manually.
+description: Design workflow orchestrator for facelifts and new surfaces. Invoke only as /design.
+disable-model-invocation: true
 ---
 
 # Design
+
+**Manual only.** This skill runs when the user invokes `/design` (or names it explicitly). It does not auto-load in coding sessions. Project-local skills (CashLift `orchestrate`, `architecture`, etc.) take precedence for normal engineering work.
 
 You orchestrate design work. You do not replace specialist skills — you load them whole, one per phase, and follow their process exactly.
 
