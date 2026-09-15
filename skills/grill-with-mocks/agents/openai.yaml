@@ -1,0 +1,7 @@
+interface:
+  display_name: "Grill With Mocks"
+  short_description: "Resolve decisions through questions and visual mocks"
+  default_prompt: "Use $grill-with-mocks to sharpen this idea through one-question-at-a-time grilling and evolving visual mocks."
+
+policy:
+  allow_implicit_invocation: false
