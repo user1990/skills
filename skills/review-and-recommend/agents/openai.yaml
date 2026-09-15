@@ -1,0 +1,7 @@
+interface:
+  display_name: "Review and Recommend"
+  short_description: "Compare evidence-backed options before implementation"
+  default_prompt: "Use $review-and-recommend to compare the credible options, recommend a path, name the right fix, and wait for my choice."
+
+policy:
+  allow_implicit_invocation: false
