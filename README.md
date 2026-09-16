@@ -60,7 +60,7 @@ Examples:
 | Phase | Start here | Main output |
 | --- | --- | --- |
 | Decide before building | `/review-and-recommend` | Evidence-backed options and a recommendation |
-| Resolve an underspecified idea | `/grill-with-mocks` | Settled decisions, a verified ephemeral mock, and an implementation plan |
+| Resolve an underspecified idea | `/grill-with-mocks` | Plain-language frontier decisions, with the smallest useful decision, visual, or capture artifact |
 | Route design work | `/design` | One specialist phase, project run card, verification, and next steps |
 | Plan or execute a design command | `/impeccable` | Product/design context, a focused design pass, or a quality report |
 | Answer a narrow design or logic question | `/prototype` | Throwaway UI or logic probe |
@@ -180,8 +180,9 @@ plus an explicit note if the best short-term option is only a compromise.
 
 ### Related skills
 
-- [`/grill-with-mocks`](#grill-with-mocks) resolves an underspecified idea one
-  decision at a time and makes the consequences visible.
+- [`/grill-with-mocks`](#grill-with-mocks) resolves an underspecified idea with
+  plain-language frontier decisions and makes the consequences visible when a
+  visual helps.
 - [`/design`](#design) routes an agreed design task into one specialist phase.
 - [`/prototype`](#prototype) tests a disputed UI or logic question with
   throwaway code instead of debating it abstractly.
@@ -196,20 +197,31 @@ Canonical source: [skills/grill-with-mocks/SKILL.md](skills/grill-with-mocks/SKI
 
 ### Intent / purpose
 
-Turn an underspecified idea into a decision-complete plan by asking one
-question at a time and evolving the smallest visual mock that reveals the
-consequences of each meaningful decision.
+Turn an underspecified idea into a decision-complete plan without making the
+user decode technical language. The skill automatically combines three routes:
+
+- **Decision** — resolve all currently answerable material frontier decisions in
+  one compact round, each with a recommendation.
+- **Visual** — show layouts, flows, states, ownership, or architecture when a
+  visual makes the decision easier to understand.
+- **Capture** — checkpoint a long or explicitly resumable session to a durable
+  Markdown file.
+
+Decision mode is always active. Visual and capture mode are added only when the
+request benefits from them. A short text-only trade-off should not generate an
+HTML mock or a repository file.
 
 The session is read-only for the product repository. It may inspect the
-workspace and create an ephemeral HTML mock, but it does not edit product files,
-publish, commit, or push.
+workspace and create an ephemeral visual artifact. Capture mode may create the
+explicitly requested `brainstorms/` record, but the skill does not edit product
+files, publish, commit, or push.
 
 ### When to use
 
-Use it when the open questions affect a surface, interaction, flow, ownership,
-roles, states, breakpoints, or system boundaries. It is especially useful when
-prose hides disagreement or when implementation would otherwise start with too
-many assumptions.
+Use it before implementation when the problem, scope, user behavior, flow,
+ownership, states, or system boundaries are still unclear. It is especially
+useful when prose hides disagreement or when implementation would otherwise
+start with too many assumptions.
 
 Use a different skill when the decision is already settled, when you need a
 production implementation, or when the work is only copy editing.
@@ -218,30 +230,35 @@ production implementation, or when the work is only copy editing.
 
 1. Invoke `/grill-with-mocks` and describe the idea in one sentence.
 2. The skill inspects relevant entry points, callers, utilities, interfaces,
-   tests, tokens, and product language.
-3. It maintains a private ledger with `Settled`, `Frontier`, `Assumptions`, and
-   `Coverage` lists.
-4. It reads `references/mock-quality.md` and starts from
-   `templates/mock.html`.
-5. It asks exactly one question per round. Parent decisions are resolved before
-   their child branches.
-6. At a visual checkpoint, it updates
-   `/tmp/grill-with-mocks/<slug>.html`, showing settled facts and clearly marked
-   inferred placeholders.
-7. It displays the mock, names the single decision it reflects, and continues
-   with the next frontier question.
-8. It finishes only when material branches, coverage, interfaces, failure
-   states, compatibility constraints, tests, and acceptance criteria are
-   explicit.
-9. It verifies the final mock at desktop and mobile sizes, using reduced-motion
-   emulation when relevant.
+   tests, tokens, and product language before asking for facts the workspace
+   already contains.
+3. It routes the session internally to decision, visual, capture, or a
+   combination of those modes, then states the route in one short line.
+4. It maintains a ledger with `Settled`, `Frontier`, `Assumptions`, `Coverage`,
+   and `Confidence` lists.
+5. It asks all currently answerable material frontier decisions in one round.
+   Parent decisions are resolved before their child branches.
+6. Every decision block uses a bold, unnumbered title, a plain-language choice,
+   numbered concrete options, a numbered recommendation, and `0. Explain this
+   decision more simply`. It uses no `Q1`, icons, arrow glyphs, or question
+   marks in the questioning blocks.
+7. It marks a choice `confirmed`, `tentative`, `recommended`, `assumed`, or
+   `external unknown`. Selecting the recommendation without understanding it
+   does not become confirmed user intent.
+8. In visual mode, it reads `references/mock-quality.md`, starts from
+   `templates/mock.html`, and updates `/tmp/grill-with-mocks/<slug>.html` only
+   after a decision changes something visible.
+9. In capture mode, it creates a unique
+   `brainstorms/{YYYY-MM-DD}-{topic-slug}.md` and checkpoints each answer.
+10. It finishes only when material branches and the selected artifact's coverage
+    are explicit, then reports only the artifacts relevant to the chosen route.
 
 Expected output:
 
-- an absolute path or link to the verified local HTML mock;
-- a concise implementation plan covering outcome, behavior, interfaces,
-  edge/failure cases, tests, and external unknowns;
-- the inspected viewports and states, with unverified limitations called out.
+- decision mode: a concise decision brief and implementation handoff;
+- visual mode: an absolute path or link to the verified local artifact, inspected
+  viewports and states, and limitations;
+- capture mode: an absolute path, short recap, open flags, and resume point.
 
 ### Examples
 
@@ -249,9 +266,28 @@ Expected output:
 /grill-with-mocks design the approval flow for team expenses
 ```
 
-If the answer changes the role model, the mock should show the relevant entry
+Example questioning shape:
+
+```md
+**Primary outcome**
+
+Choose the result this workflow must achieve
+
+1. Finish faster
+2. Make fewer mistakes
+3. Give people more control
+
+**Recommended:** 3. Give people more control, because mistakes would be harder
+to reverse.
+
+0. Explain this decision more simply
+```
+
+If the answer changes the role model, visual mode should show the relevant entry
 point, role-specific access, main interaction, and resulting state. If it only
-changes wording, it should not trigger an unnecessary redraw.
+changes wording, it should not trigger an unnecessary redraw. If the user cannot
+understand a decision, `0` keeps it unsettled and triggers a concrete example
+before asking again.
 
 ### Related skills
 
