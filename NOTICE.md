@@ -11,7 +11,7 @@ This repository bundles third-party agent skills. Each retains its upstream lice
 | scrollcraft | [nateherkai/scroll-craft](https://github.com/nateherkai/scroll-craft) | `plugins/nateherk-design/skills/scrollcraft`; pack overlay in `references/host.md` |
 | prototype | [mattpocock/skills](https://github.com/mattpocock/skills) | Engineering skill pattern |
 | design | Original orchestrator in this repo | Composes the above |
-| grill-with-mocks | Original skill in this repo | Inspired by Matt Pocock's `grill-me`, HumanLayer's `show-me`, and the planning/render-validation patterns of Codex `visualize` and `visual-recap`; no runtime dependency on those skills |
+| grill-with-mocks | Original skill in this repo | Inspired by Matt Pocock's `grill-me`, Nate Herkai's capture-first `grill-me`, obra/superpowers' brainstorming workflow, HumanLayer's `show-me`, and the planning/render-validation patterns of Codex `visualize` and `visual-recap`; no runtime dependency on those skills |
 
 Do not use Claude `/plugin install` for scrollcraft when using this pack.
 
